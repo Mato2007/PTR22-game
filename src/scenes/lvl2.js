@@ -22,7 +22,8 @@ export default class level2 extends Phaser.Scene {
       this.load.image('tl2', '/static/tile2.png');
       this.load.image('dr1', '/static/door1.png');
       this.load.image('dr2', '/static/door2.png');
-      this.load.image('key1', '/static/key1.png')
+      this.load.image('key1', '/static/key1.png');
+      this.load.image('sp1', '/static/spike.png');
       
     }
     create(){
@@ -36,8 +37,11 @@ export default class level2 extends Phaser.Scene {
       //images, sprites,...
         const platforma = this.physics.add.image(0,320, 'lvl2').setOrigin(0,0);
         this.player = this.physics.add.sprite(0, 260, 'player').setOrigin(0,0);
-        
-        var a = [
+        this.dr1 = this.physics.add.image(2176,192, 'dr1').setOrigin(0, 0).setImmovable(true).setDepth(-50);
+        this.key1 = this.physics.add.image(1480,260, 'key1').setOrigin(0,0).setImmovable(true);
+
+
+        var tls = [
           this.physics.add.image(384,256, 'tl2').setOrigin(0, 0).setImmovable(true), 
           this.physics.add.image(448,192, 'tl2').setOrigin(0, 0).setImmovable(true),
           this.physics.add.image(512,128, 'tl2').setOrigin(0, 0).setImmovable(true),
@@ -56,8 +60,21 @@ export default class level2 extends Phaser.Scene {
           this.physics.add.image(1856,128, 'tl2').setOrigin(0, 0).setImmovable(true),
           this.physics.add.image(1856,128, 'tl2').setOrigin(0, 0).setImmovable(true),
         ];
-        this.dr1 = this.physics.add.image(2176,192, 'dr1').setOrigin(0, 0).setImmovable(true).setDepth(-50);
-        this.key1 = this.physics.add.image(1480,260, 'key1').setOrigin(0,0).setImmovable(true);
+        var spks = [
+          this.physics.add.image(704,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+          this.physics.add.image(768,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+          this.physics.add.image(832,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+          this.physics.add.image(960,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+          this.physics.add.image(1024,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+          this.physics.add.image(1152,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+          this.physics.add.image(1216,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+          this.physics.add.image(1376,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+          this.physics.add.image(1568,288, 'sp1').setImmovable(true).setSize(34,62).setOffset(30,0).setAngle(-90),
+          this.physics.add.image(1664,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+          this.physics.add.image(1792,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+          this.physics.add.image(1920,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+        ]
+        
         
       
       //physics for this.player
@@ -73,7 +90,7 @@ export default class level2 extends Phaser.Scene {
 
       //coliders
         this.physics.add.collider(this.player, platforma);
-        this.physics.add.collider(this.player, a);
+        this.physics.add.collider(this.player, tls);
           
       
       //camera follow

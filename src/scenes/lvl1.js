@@ -86,7 +86,7 @@ export default class level1 extends Phaser.Scene {
       if(tst == 1){
         this.cameras.main.fadeOut(1000, 0, 0, 0)
         this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
-        this.scene.start('level2')
+        this.scene.start('level2');
       })
       tst = 0;
       }
@@ -111,7 +111,7 @@ export default class level1 extends Phaser.Scene {
       if(tst == 1){
         this.cameras.main.fadeOut(1000, 0, 0, 0);
         this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
-        this.scene.start('level2')
+        this.scene.start('level2');
       })
       tst = 0;
       }
