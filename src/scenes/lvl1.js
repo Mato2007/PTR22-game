@@ -20,7 +20,8 @@ export default class level1 extends Phaser.Scene {
     this.load.image('lvl1', '/static/level1.png');
     this.load.image('tl1', '/static/tile1.png');
     this.load.image('dr2', '/static/door2.png');
-    this.load.image('dr3', '/static/door3.png')
+    this.load.image('dr3', '/static/door3.png');
+    this.load.image('player_mirror', '/static/character_mirror.png')
     
     //movement keys
     cursors = this.input.keyboard.createCursorKeys();
@@ -95,10 +96,12 @@ export default class level1 extends Phaser.Scene {
     if(keyW.isDown && this.player.body.touching.down){ //jump
       this.player.setVelocityY(-380);
     }
-    if(keyD.isDown && !keyA.isDown){ //player move right
+    if(keyD.isDown && !keyA.isDown){ //player move right and keep the defaut texture
+      this.player.setTexture('player');
       this.player.setVelocityX(280);
     }
-    if(keyA.isDown && !keyD.isDown){ //player move left
+    if(keyA.isDown && !keyD.isDown){ //player move left and set texture to player_mirror
+      this.player.setTexture('player_mirror');
       this.player.setVelocityX(-280);
     }
     if(!keyA.isDown && !keyD.isDown){ //player keep still

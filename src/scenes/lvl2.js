@@ -1,5 +1,5 @@
 import * as Phaser from 'phaser';
-let  keyA, keyD, keyW, keyY;
+let  keyA, keyD, keyW, keyY, keyS;
 var cursors;
 var key = false;
 var ynak;
@@ -17,6 +17,7 @@ export default class level2 extends Phaser.Scene {
       keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
       keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
       keyY = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Y);
+      keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
       this.load.image('background', '/static/background.jpg');
       this.load.image('lvl2', '/static/level2.png');
       this.load.image('character', '/static/character.png');
@@ -77,6 +78,7 @@ export default class level2 extends Phaser.Scene {
         this.physics.add.image(1664,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
         this.physics.add.image(1792,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
         this.physics.add.image(1920,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+        this.physics.add.image(1984,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
         
       ]
         
@@ -101,24 +103,31 @@ export default class level2 extends Phaser.Scene {
     //camera follow
       this.cameras.main.startFollow(this.player, true, 0.05, 1, 0, 4);
       this.cameras.main.setBounds(0, -400,  2240, 1024);
-    
-      
-
     }
-    
-    
+     
     update(){    
       if(keyW.isDown && this.player.body.touching.down){ //jump
         this.player.setVelocityY(-380);
       }
-      if(keyD.isDown && !keyA.isDown){ //player move right
+      if(keyD.isDown && !keyA.isDown){ //player move right and keep the defaut texture
+        this.player.setTexture('player');
         this.player.setVelocityX(280);
       }
-      if(keyA.isDown && !keyD.isDown){ //player move left
+      if(keyA.isDown && !keyD.isDown){ //player move left and set texture to player_mirror
+        this.player.setTexture('player_mirror');
         this.player.setVelocityX(-280);
       }
       if(!keyA.isDown && !keyD.isDown){ //player keep still
         this.player.setVelocityX(0);
+      }
+      if(keyS.isDown){
+        if(tst == 1){
+          this.cameras.main.fadeOut(1000, 0, 0, 0)
+          this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
+          this.scene.start('level3')
+        })
+        tst = 0;
+        }
       }
 
       if (this.player.x < 0) {
