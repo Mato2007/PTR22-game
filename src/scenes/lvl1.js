@@ -75,9 +75,6 @@ export default class level1 extends Phaser.Scene {
     this.physics.add.collider(this.player, platforma);
     this.physics.add.collider(this.player, tls);
     this.physics.add.collider(this.player, spks, function(){rndm = 1});
-
-    
-
   }
 
   update(){
