@@ -41,7 +41,8 @@ export default class level2 extends Phaser.Scene {
       const platforma = this.physics.add.image(0,320, 'lvl2').setOrigin(0,0);
       this.player = this.physics.add.sprite(0, 260, 'player').setOrigin(0,0);
       this.dr1 = this.physics.add.image(2176,192, 'dr1').setOrigin(0, 0).setImmovable(true).setDepth(-50);
-      this.key1 = this.physics.add.image(1280,260, 'key1').setOrigin(0,0).setImmovable(true);
+      this.key1 = this.physics.add.image(1300,260, 'key1').setOrigin(0,0).setImmovable(true);
+      this.btn1 = this.physics.add.image(1504,208.5, 'btn1').setImmovable(true).setAngle(180)
 
 
       var tls = [
@@ -79,7 +80,7 @@ export default class level2 extends Phaser.Scene {
         
       ]
         
-        this.btn1 = this.physics.add.image(1504,208.5, 'btn1').setImmovable(true).setAngle(180)
+        
       
     //physics for this.player
       this.player.setBounce(0, 0);
@@ -160,7 +161,7 @@ export default class level2 extends Phaser.Scene {
         setTimeout(() => {
           this.player.x = 1603; 
           this.player.y = 196; 
-        }, 600);
+        }, 680);
         
       }
       if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.btn1.getBounds()) == true && key == false) { 
