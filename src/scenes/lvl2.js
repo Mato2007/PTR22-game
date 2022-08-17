@@ -1,51 +1,45 @@
 import * as Phaser from 'phaser';
-let  keyA, keyD, keyW, keyY, keyS;
+import Player from '../objects/player'
+
+let keyS, keyY;
 var cursors;
-var key = false;
-var ynak;
 var tst = 1;
-var rndm = 0;
+var dead = 0;
 
 export default class level2 extends Phaser.Scene {
     constructor() {
-      super('level2');
+      super({ key:'level2' });
+      
     }
     
     preload(){
-      cursors = this.input.keyboard.createCursorKeys();
-      keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-      keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-      keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-      keyY = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Y);
-      keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-      /*this.load.image('background', '/static/background.jpg');
-      this.load.image('lvl2', '/static/level2.png');
-      this.load.image('character', '/static/character.png');
-      this.load.image('tl2', '/static/tile2.png');
-      this.load.image('dr1', '/static/door1.png');
-      this.load.image('dr2', '/static/door2.png');
-      this.load.image('key1', '/static/key1.png');
-      this.load.image('spike', '/static/spike.png');
-      this.load.image('btn1', '/static/button1.png')
-      this.load.image('btn2', '/static/button2.png')*/
-      
     }
+
     create(){
-    //background
+      //you need a key to open the door, to the next level
+      this.key = false;
+
+      //keyboard inputs
+      cursors = this.input.keyboard.createCursorKeys();
+      keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);  
+      keyY = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Y);
+
+      //background
       this.background = this.add.tileSprite(-1000, -900, 2240, 0, 'background')
       .setOrigin(0, 0)
       .setScrollFactor(0.5, 0)
       .setDepth(-100);
-
-      
-    //images, sprites,...
+        
+      //images,...
       const platforma = this.physics.add.image(0,320, 'lvl2').setOrigin(0,0);
-      this.player = this.physics.add.sprite(0, 260, 'player').setOrigin(0,0);
       this.dr1 = this.physics.add.image(2176,192, 'dr1').setOrigin(0, 0).setImmovable(true).setDepth(-50);
       this.key1 = this.physics.add.image(1300,260, 'key1').setOrigin(0,0).setImmovable(true);
       this.btn1 = this.physics.add.image(1504,208.5, 'btn1').setImmovable(true).setAngle(180)
 
+      //sprite(player)
+      this.player = new Player(this, 0, 260).setOrigin(0,0);
 
+      //tiles
       var tls = [
         this.physics.add.image(384,256, 'tl2').setOrigin(0, 0).setImmovable(true), 
         this.physics.add.image(448,192, 'tl2').setOrigin(0, 0).setImmovable(true),
@@ -65,6 +59,8 @@ export default class level2 extends Phaser.Scene {
         this.physics.add.image(1856,128, 'tl2').setOrigin(0, 0).setImmovable(true),
         this.physics.add.image(1856,128, 'tl2').setOrigin(0, 0).setImmovable(true),
       ];
+
+      //spikes
       var spks = [
         this.physics.add.image(704,256, 'spike').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
         this.physics.add.image(768,256, 'spike').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
@@ -79,47 +75,30 @@ export default class level2 extends Phaser.Scene {
         this.physics.add.image(1792,256, 'spike').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
         this.physics.add.image(1920,256, 'spike').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
         this.physics.add.image(1984,256, 'spike').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
-        
       ]
-        
-        
-      
-    //physics for this.player
+
+      //physics for this.player
       this.player.setBounce(0, 0);
       this.player.setCollideWorldBounds(false);
       this.player.setGravityY(850);
       this.player.setFrictionX(1);
 
-    //physics for platforma
+      //physics for platforma
       platforma.setGravityY(0)
       platforma.setGravity(false);
       platforma.setImmovable(true);
 
-    //coliders
+      //coliders
       this.physics.add.collider(this.player, platforma);
       this.physics.add.collider(this.player, tls);
-      this.physics.add.collider(this.player, spks, function(){rndm = 1});
-    
-    //camera follow
+      this.physics.add.collider(this.player, spks, function(){dead = 1});
+      
+      //camera follow
       this.cameras.main.startFollow(this.player, true, 0.05, 1, 0, 4);
       this.cameras.main.setBounds(0, -400,  2240, 1024);
     }
      
     update(){    
-      if(keyW.isDown && this.player.body.touching.down){ //jump
-        this.player.setVelocityY(-380);
-      }
-      if(keyD.isDown && !keyA.isDown){ //player move right and keep the defaut texture
-        this.player.setTexture('player');
-        this.player.setVelocityX(280);
-      }
-      if(keyA.isDown && !keyD.isDown){ //player move left and set texture to player_mirror
-        this.player.setTexture('player_mirror');
-        this.player.setVelocityX(-280);
-      }
-      if(!keyA.isDown && !keyD.isDown){ //player keep still
-        this.player.setVelocityX(0);
-      }
       if(keyS.isDown){
         if(tst == 1){
           this.cameras.main.fadeOut(1000, 0, 0, 0)
@@ -129,7 +108,6 @@ export default class level2 extends Phaser.Scene {
         tst = 0;
         }
       }
-
       if (this.player.x < 0) {
         this.player.x = 0;
       }
@@ -140,7 +118,7 @@ export default class level2 extends Phaser.Scene {
         this.player.x = 2048;
         this.player.y = 128;
       }
-      if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.dr1.getBounds()) == true && key == true) { //door change texture(door texture == door opened), sceene change to level2
+      if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.dr1.getBounds()) == true && this.key == true) { //door change texture(door texture == door opened), sceene change to level2
         this.dr1.setTexture('dr2');
         if(tst == 1){
           this.cameras.main.fadeOut(1000, 0, 0, 0)
@@ -149,44 +127,24 @@ export default class level2 extends Phaser.Scene {
         })
         tst = 0;
         }
-        
       }
-      /*if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.dr1.getBounds()) == true && key == false) { //door change texture(door texture == door opened), sceene change to level2
-        //add text(you need a key)
-      }*/
       if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.dr1.getBounds()) == false) { //door texture == door closed, if player isn't touching the door
         this.dr1.setTexture('dr1');
       }
       if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.key1.getBounds()) == true) { //door texture == door closed, if player isn't touching the door
         this.key1.destroy();
-        key = true;
+        this.key = true;
       }
-      if(rndm == 1){
+      if(dead == 1){
         this.scene.restart();
-        rndm = 0;
+        dead = 0;
       }
-      if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.btn1.getBounds()) == true && key == true) { 
-        this.btn1.setTexture('btn2');
-        setTimeout(() => {
-          this.player.x = 1603; 
-          this.player.y = 196; 
-        }, 680);
-        
-      }
-      if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.btn1.getBounds()) == true && key == false) { 
-        this.btn1.setTexture('btn2')
-      }
-      if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.btn1.getBounds()) == false) { 
-        this.btn1.setTexture('btn1')
-      }
+      
+      
     }
 
     preUpdate() {
       this.background.setTilePosition(this.scene.cameras.main.scrollX * 0.2);
     }
-    
-
-
-
 
 }

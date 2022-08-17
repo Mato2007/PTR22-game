@@ -1,8 +1,10 @@
 import * as Phaser from 'phaser';
-let keyA, keyD, keyW, keyS;
-var cursors;
+import Player from '../objects/player'
+
 var tst = 1;
-var rndm = 0;
+var dead = 0;
+let keyS;
+var cursors;
 
 export default class level1 extends Phaser.Scene {
   constructor() {
@@ -10,34 +12,24 @@ export default class level1 extends Phaser.Scene {
   }
 
   preload() {
-    //load images
-    /*this.load.image('background', '/static/background.jpg');
-    this.load.image('spike', '/static/spike.png');
-    this.load.image('dr1', '/static/door1.png');
-    this.load.image('player', '/static/character.png');
-    this.load.image('tiles', '/static/platformPack_tilesheet.png');
-    this.load.image('lvl1', '/static/level1.png');
-    this.load.image('tl1', '/static/tile1.png');
-    this.load.image('dr2', '/static/door2.png');
-    this.load.image('dr3', '/static/door3.png');
-    this.load.image('player_mirror', '/static/character_mirror.png')*/
-    
-    //movement keys
-    cursors = this.input.keyboard.createCursorKeys();
-    keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-    keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-    keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-    keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
   }
 
   create() {
-    //images, sprites  
-    const backgroundImage = this.add.image(-1000, -900, 'background').setOrigin(0, 0).setDepth(-100);
+    //sprite(player)
+    this.player = new Player(this, 0, 260).setOrigin(0,0);
+
+    //background
+    this.background = this.add.tileSprite(-1000, -900, 2240, 0, 'background')
+      .setOrigin(0, 0)
+      .setScrollFactor(0.5, 0)
+      .setDepth(-100);
+
+    //images 
     const platforma = this.physics.add.image(0,321, 'lvl1').setOrigin(0,0);
-    this.player = this.physics.add.sprite(0, 225, 'player').setOrigin(0,0);
     this.dr1 = this.physics.add.image(960, 192, 'dr1').setOrigin(0,0).setDepth(-50).setImmovable(true);  
     this.dr3 = this.physics.add.image(960, 192, 'dr3').setOrigin(0,0).setImmovable(true);
 
+    //tiles
     var tls = [
     this.physics.add.image(170,256, 'tl1').setOrigin(0, 0).setImmovable(true),
     this.physics.add.image(234,192, 'tl1').setOrigin(0, 0).setImmovable(true),
@@ -48,6 +40,7 @@ export default class level1 extends Phaser.Scene {
     this.physics.add.image(852,256, 'tl1').setOrigin(0, 0).setImmovable(true),
     ]
     
+    //spikes
     var spks = [
     this.physics.add.image(375,256, 'spike').setOrigin(0, 0).setImmovable(true).setSize(64,34).setOffset(0,30),
     this.physics.add.image(439,256, 'spike').setOrigin(0, 0).setImmovable(true).setSize(64,34).setOffset(0,30),
@@ -56,7 +49,6 @@ export default class level1 extends Phaser.Scene {
     this.physics.add.image(640,256, 'spike').setOrigin(0, 0).setImmovable(true).setSize(64,34).setOffset(0,30), 
     this.physics.add.image(767,256, 'spike').setOrigin(0, 0).setImmovable(true).setSize(64,34).setOffset(0,30)
     ];
-
 
     //physics for this.player
     this.player.setBounce(0.1);
@@ -68,13 +60,14 @@ export default class level1 extends Phaser.Scene {
     platforma.setGravity(false);
     platforma.setImmovable(true);
 
-
-    
-
     //coliders
     this.physics.add.collider(this.player, platforma);
     this.physics.add.collider(this.player, tls);
-    this.physics.add.collider(this.player, spks, function(){rndm = 1});
+    this.physics.add.collider(this.player, spks, function(){dead = 1});
+
+    //keyboard input
+    cursors = this.input.keyboard.createCursorKeys();
+    keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);  
   }
 
   update(){
@@ -92,20 +85,7 @@ export default class level1 extends Phaser.Scene {
     if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.dr3.getBounds()) == false) { //door texture == door closed, if player isn't touching the door
       this.dr1.setTexture('dr1');
     }
-    if(keyW.isDown && this.player.body.touching.down){ //jump
-      this.player.setVelocityY(-380);
-    }
-    if(keyD.isDown && !keyA.isDown){ //player move right and keep the defaut texture
-      this.player.setTexture('player');
-      this.player.setVelocityX(280);
-    }
-    if(keyA.isDown && !keyD.isDown){ //player move left and set texture to player_mirror
-      this.player.setTexture('player_mirror');
-      this.player.setVelocityX(-280);
-    }
-    if(!keyA.isDown && !keyD.isDown){ //player keep still
-      this.player.setVelocityX(0);
-    }
+    
     if(keyS.isDown){
       if(tst == 1){
         this.cameras.main.fadeOut(1000, 0, 0, 0);
@@ -115,9 +95,9 @@ export default class level1 extends Phaser.Scene {
       tst = 0;
       }
     }
-    if(rndm == 1){
+    if(dead == 1){
       this.scene.restart();
-      rndm = 0
+      dead = 0;
     }
     
     

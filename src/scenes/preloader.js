@@ -16,8 +16,10 @@ export default class Preloader extends Phaser.Scene
         //player
         this.load.image('player', '/static/character.png');
         this.load.image('player_mirror', '/static/character_mirror.png')
+
         //this.load.image('tiles', '/static/platformPack_tilesheet.png');
         this.load.image('key1', '/static/key1.png');
+
         //tiles
         this.load.image('tl1', '/static/tile1.png');
         this.load.image('tl2', '/static/tile2.png');
@@ -30,11 +32,11 @@ export default class Preloader extends Phaser.Scene
         //buttons (btn1 = normal button, btn2 = pressed/pushed button)
         this.load.image('btn1', '/static/button1.png');
         this.load.image('btn2', '/static/button2.png');
+
         //levels
         this.load.image('lvl1', '/static/level1.png');
         this.load.image('lvl2', '/static/level2.png');
         this.load.image('lvl3', '/static/level3.png');
-        
     }
 
     create ()
