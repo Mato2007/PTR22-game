@@ -17,16 +17,16 @@ export default class level3 extends Phaser.Scene {
       keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
       keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
       keyY = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Y);
-      this.load.image('background', '/static/background.jpg');
+      /*this.load.image('background', '/static/background.jpg');
       this.load.image('lvl3', '/static/level3.png');
       this.load.image('character', '/static/character.png');
       this.load.image('tl2', '/static/tile2.png');
       this.load.image('dr1', '/static/door1.png');
       this.load.image('dr2', '/static/door2.png');
       this.load.image('key1', '/static/key1.png');
-      this.load.image('sp1', '/static/spike.png');
+      this.load.image('spike', '/static/spike.png');
       this.load.image('btn1', '/static/button1.png')
-      this.load.image('btn2', '/static/button2.png')    
+      this.load.image('btn2', '/static/button2.png')*/
     }
     create(){
     //background

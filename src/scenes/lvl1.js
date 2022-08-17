@@ -1,5 +1,4 @@
 import * as Phaser from 'phaser';
-
 let keyA, keyD, keyW, keyS;
 var cursors;
 var tst = 1;
@@ -12,7 +11,7 @@ export default class level1 extends Phaser.Scene {
 
   preload() {
     //load images
-    this.load.image('background', '/static/background.jpg');
+    /*this.load.image('background', '/static/background.jpg');
     this.load.image('spike', '/static/spike.png');
     this.load.image('dr1', '/static/door1.png');
     this.load.image('player', '/static/character.png');
@@ -21,7 +20,7 @@ export default class level1 extends Phaser.Scene {
     this.load.image('tl1', '/static/tile1.png');
     this.load.image('dr2', '/static/door2.png');
     this.load.image('dr3', '/static/door3.png');
-    this.load.image('player_mirror', '/static/character_mirror.png')
+    this.load.image('player_mirror', '/static/character_mirror.png')*/
     
     //movement keys
     cursors = this.input.keyboard.createCursorKeys();

@@ -2,6 +2,8 @@ import * as Phaser from 'phaser';
 import level1 from './scenes/lvl1';
 import level2 from './scenes/lvl2';
 import level3 from './scenes/lvl3';
+import Preloader from './scenes/preloader';
+
 
 const config = {
   name: 'app',
@@ -13,7 +15,7 @@ const config = {
   
   width: 1024,
   height: 512,
-  scene: [level1, level2, level3],
+  scene: [Preloader, level1, level2, level3],
   autoCenter: true,
 
   physics: {

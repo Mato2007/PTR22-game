@@ -18,16 +18,16 @@ export default class level2 extends Phaser.Scene {
       keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
       keyY = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Y);
       keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-      this.load.image('background', '/static/background.jpg');
+      /*this.load.image('background', '/static/background.jpg');
       this.load.image('lvl2', '/static/level2.png');
       this.load.image('character', '/static/character.png');
       this.load.image('tl2', '/static/tile2.png');
       this.load.image('dr1', '/static/door1.png');
       this.load.image('dr2', '/static/door2.png');
       this.load.image('key1', '/static/key1.png');
-      this.load.image('sp1', '/static/spike.png');
+      this.load.image('spike', '/static/spike.png');
       this.load.image('btn1', '/static/button1.png')
-      this.load.image('btn2', '/static/button2.png')
+      this.load.image('btn2', '/static/button2.png')*/
       
     }
     create(){
@@ -66,19 +66,19 @@ export default class level2 extends Phaser.Scene {
         this.physics.add.image(1856,128, 'tl2').setOrigin(0, 0).setImmovable(true),
       ];
       var spks = [
-        this.physics.add.image(704,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
-        this.physics.add.image(768,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
-        this.physics.add.image(832,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
-        this.physics.add.image(960,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
-        this.physics.add.image(1024,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
-        this.physics.add.image(1152,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
-        this.physics.add.image(1216,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
-        this.physics.add.image(1312,224, 'sp1').setImmovable(true).setSize(64,34).setOffset(0,0).setAngle(180),
-        this.physics.add.image(1568,288, 'sp1').setImmovable(true).setSize(34,62).setOffset(30,0).setAngle(-90),
-        this.physics.add.image(1664,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
-        this.physics.add.image(1792,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
-        this.physics.add.image(1920,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
-        this.physics.add.image(1984,256, 'sp1').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+        this.physics.add.image(704,256, 'spike').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+        this.physics.add.image(768,256, 'spike').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+        this.physics.add.image(832,256, 'spike').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+        this.physics.add.image(960,256, 'spike').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+        this.physics.add.image(1024,256, 'spike').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+        this.physics.add.image(1152,256, 'spike').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+        this.physics.add.image(1216,256, 'spike').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+        this.physics.add.image(1312,224, 'spike').setImmovable(true).setSize(64,34).setOffset(0,0).setAngle(180),
+        this.physics.add.image(1568,288, 'spike').setImmovable(true).setSize(34,62).setOffset(30,0).setAngle(-90),
+        this.physics.add.image(1664,256, 'spike').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+        this.physics.add.image(1792,256, 'spike').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+        this.physics.add.image(1920,256, 'spike').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
+        this.physics.add.image(1984,256, 'spike').setOrigin(0,0).setImmovable(true).setSize(64,34).setOffset(0,30),
         
       ]
         
