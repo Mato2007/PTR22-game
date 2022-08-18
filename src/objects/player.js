@@ -40,7 +40,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
           }
           if(Phaser.Geom.Intersects.RectangleToRectangle(this.getBounds(), this.scene.btn1.getBounds()) == true && this.scene.key == false) { 
               this.scene.btn1.setTexture('btn2')
-            }
+          }
           if(Phaser.Geom.Intersects.RectangleToRectangle(this.getBounds(), this.scene.btn1.getBounds()) == false) { 
             this.scene.btn1.setTexture('btn1')
           }
