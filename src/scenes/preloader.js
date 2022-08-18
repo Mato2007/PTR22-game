@@ -10,9 +10,9 @@ export default class Preloader extends Phaser.Scene
 
     preload ()
     {
-        
         this.load.image('background', '/static/background.jpg');
         this.load.image('spike', '/static/spike.png');
+
         //player
         this.load.image('player', '/static/character.png');
         this.load.image('player_mirror', '/static/character_mirror.png')
@@ -24,11 +24,10 @@ export default class Preloader extends Phaser.Scene
         this.load.image('tl1', '/static/tile1.png');
         this.load.image('tl2', '/static/tile2.png');
 
-        //doors (dr1 = closed door, dr2 = opened door, dr3 = invisible door)
+        //doors (dr1 = closed door, dr2 = opened door)
         this.load.image('dr1', '/static/door1.png');
         this.load.image('dr2', '/static/door2.png');
-        this.load.image('dr3', '/static/door3.png');
-        
+               
         //buttons (btn1 = normal button, btn2 = pressed/pushed button)
         this.load.image('btn1', '/static/button1.png');
         this.load.image('btn2', '/static/button2.png');
@@ -37,6 +36,10 @@ export default class Preloader extends Phaser.Scene
         this.load.image('lvl1', '/static/level1.png');
         this.load.image('lvl2', '/static/level2.png');
         this.load.image('lvl3', '/static/level3.png');
+
+        //menu screen
+        this.load.image('black_screen', '/static/black_screen.png');
+        this.load.image('idk', '/static/idk.png');
     }
 
     create ()

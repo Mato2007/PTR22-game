@@ -98,7 +98,8 @@ export default class level2 extends Phaser.Scene {
       this.cameras.main.setBounds(0, -400,  2240, 1024);
     }
      
-    update(){    
+    update(){
+      //teleport to level3
       if(keyS.isDown){
         if(tst == 1){
           this.cameras.main.fadeOut(1000, 0, 0, 0)
@@ -108,17 +109,25 @@ export default class level2 extends Phaser.Scene {
         tst = 0;
         }
       }
+
+      //movement limit
       if (this.player.x < 0) {
         this.player.x = 0;
       }
+
+      //movement limit
       if (this.player.x > 2181) {
         this.player.x = 2181;
       }
+
+      //teleport shortcut
       if(keyY.isDown){
         this.player.x = 2048;
         this.player.y = 128;
       }
-      if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.dr1.getBounds()) == true && this.key == true) { //door change texture(door texture == door opened), sceene change to level2
+
+      //door change texture(door texture == door opened), sceene change to level2
+      if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.dr1.getBounds()) == true && this.key == true) {
         this.dr1.setTexture('dr2');
         if(tst == 1){
           this.cameras.main.fadeOut(1000, 0, 0, 0)
@@ -128,19 +137,23 @@ export default class level2 extends Phaser.Scene {
         tst = 0;
         }
       }
-      if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.dr1.getBounds()) == false) { //door texture == door closed, if player isn't touching the door
+
+      //door texture == door closed, if player isn't touching the door
+      if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.dr1.getBounds()) == false) { 
         this.dr1.setTexture('dr1');
       }
-      if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.key1.getBounds()) == true) { //door texture == door closed, if player isn't touching the door
+
+      //door texture == door closed, if player isn't touching the door
+      if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.key1.getBounds()) == true) { 
         this.key1.destroy();
         this.key = true;
       }
+
+      //if player dies, this scene restarts
       if(dead == 1){
         this.scene.restart();
         dead = 0;
       }
-      
-      
     }
 
     preUpdate() {

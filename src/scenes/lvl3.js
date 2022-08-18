@@ -9,7 +9,7 @@ var cursors;
 
 export default class level3 extends Phaser.Scene {
     constructor() {
-      super('level3');
+      super({ key: 'level3' });
     }
     
     preload(){

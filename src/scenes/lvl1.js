@@ -27,7 +27,7 @@ export default class level1 extends Phaser.Scene {
     //images 
     const platforma = this.physics.add.image(0,321, 'lvl1').setOrigin(0,0);
     this.dr1 = this.physics.add.image(960, 192, 'dr1').setOrigin(0,0).setDepth(-50).setImmovable(true);  
-    this.dr3 = this.physics.add.image(960, 192, 'dr3').setOrigin(0,0).setImmovable(true);
+    // this.dr3 = this.physics.add.image(960, 192, 'dr3').setOrigin(0,0).setImmovable(true);
 
     //tiles
     var tls = [
@@ -71,7 +71,8 @@ export default class level1 extends Phaser.Scene {
   }
 
   update(){
-    if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.dr3.getBounds()) == true) { //door change texture(door texture == door opened), sceene change to level2
+    //door change texture(door texture == door opened), sceene change to level2
+    if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.dr1.getBounds()) == true) {
       this.dr1.setTexture('dr2');
       if(tst == 1){
         this.cameras.main.fadeOut(1000, 0, 0, 0)
@@ -82,10 +83,13 @@ export default class level1 extends Phaser.Scene {
       }
       
     }
-    if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.dr3.getBounds()) == false) { //door texture == door closed, if player isn't touching the door
+
+    //door texture == door closed, if player isn't touching the door
+    if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.dr1.getBounds()) == false) { 
       this.dr1.setTexture('dr1');
     }
     
+    //teleport to level2
     if(keyS.isDown){
       if(tst == 1){
         this.cameras.main.fadeOut(1000, 0, 0, 0);
@@ -95,16 +99,12 @@ export default class level1 extends Phaser.Scene {
       tst = 0;
       }
     }
+
+    //if player dies, this scene restarts
     if(dead == 1){
       this.scene.restart();
       dead = 0;
     }
-    
-    
   }
-
-
-
-
 }
 
