@@ -51,15 +51,20 @@ export default class level3 extends Phaser.Scene {
 
     }
        
-    update(){    
-      if(keyY.isDown){ //teleport shortcut
+    update(){  
+      //teleport shortcut  
+      if(keyY.isDown){
         this.player.x = 2048;
         this.player.y = 128;
       }
-      if (this.player.x < 0) { //movement limit
+
+      //movement limit
+      if (this.player.x < 0) {
         this.player.x = 0;
       }
-      if (this.player.x > 3460) { //movement limit 
+
+      //movement limit 
+      if (this.player.x > 3460) {
         this.player.x = 3460;
       }
     }
