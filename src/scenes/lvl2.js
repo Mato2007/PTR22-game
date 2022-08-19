@@ -18,7 +18,7 @@ export default class level2 extends Phaser.Scene {
     create(){
       //fade in
       this.cameras.main.fadeIn(500);
-      
+
       //you need a key to open the door, to the next level
       this.key = false;
 
@@ -103,15 +103,15 @@ export default class level2 extends Phaser.Scene {
      
     update(){
       //teleport to level3
-      if(keyS.isDown){
-        if(tst == 1){
-          this.cameras.main.fadeOut(1000, 0, 0, 0)
-          this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
-          this.scene.start('level3')
-        })
-        tst = 0;
-        }
-      }
+      // if(keyS.isDown){
+      //   if(tst == 1){
+      //     this.cameras.main.fadeOut(1000, 0, 0, 0)
+      //     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
+      //     this.scene.start('level3')
+      //   })
+      //   tst = 0;
+      //   }
+      // }
 
       //movement limit
       if (this.player.x < 0) {
@@ -124,10 +124,10 @@ export default class level2 extends Phaser.Scene {
       }
 
       //teleport shortcut
-      if(keyY.isDown){
-        this.player.x = 2048;
-        this.player.y = 128;
-      }
+      // if(keyY.isDown){
+      //   this.player.x = 2048;
+      //   this.player.y = 128;
+      // }
 
       //door change texture(door texture == door opened), sceene change to level2
       if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.dr1.getBounds()) == true && this.key == true) {

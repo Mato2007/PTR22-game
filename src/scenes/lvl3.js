@@ -17,7 +17,7 @@ export default class level3 extends Phaser.Scene {
     create(){
       //fade in
       this.cameras.main.fadeIn(500);
-      
+
       //background
       this.background = this.add.tileSprite(-500, -900, 2240, 0, 'background').setDepth(-100)
       .setOrigin(0, 0)
@@ -41,7 +41,6 @@ export default class level3 extends Phaser.Scene {
 
       //colliders
       this.physics.add.collider(this.player, platforma);
-      /*this.physics.add.collider(this.player, spks, function(){dead = 1});*/
       
       //camera follow
       this.cameras.main.startFollow(this.player, true, 0.05, 1, 0, 4);
@@ -86,10 +85,10 @@ export default class level3 extends Phaser.Scene {
       }
       
       //teleport shortcut  
-      if(keyY.isDown){
-        this.player.x = 2048;
-        this.player.y = 128;
-      }
+      // if(keyY.isDown){
+      //   this.player.x = 2048;
+      //   this.player.y = 128;
+      // }
 
       //movement limit
       if (this.player.x < 0) {

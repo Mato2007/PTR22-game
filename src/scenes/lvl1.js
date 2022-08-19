@@ -17,7 +17,7 @@ export default class level1 extends Phaser.Scene {
   create() {
     //fade in
     this.cameras.main.fadeIn(500);
-    
+
     //sprite(player)
     this.player = new Player(this, 0, 260).setOrigin(0,0);
 
@@ -93,15 +93,15 @@ export default class level1 extends Phaser.Scene {
     }
     
     //teleport to level2
-    if(keyS.isDown){
-      if(tst == 1){
-        this.cameras.main.fadeOut(1000, 0, 0, 0);
-        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
-        this.scene.start('level2');
-      })
-      tst = 0;
-      }
-    }
+    // if(keyS.isDown){
+    //   if(tst == 1){
+    //     this.cameras.main.fadeOut(1000, 0, 0, 0);
+    //     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
+    //     this.scene.start('level2');
+    //   })
+    //   tst = 0;
+    //   }
+    // }
 
     //if player dies, this scene restarts
     if(dead == 1){
