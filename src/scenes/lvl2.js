@@ -16,6 +16,9 @@ export default class level2 extends Phaser.Scene {
     }
 
     create(){
+      //fade in
+      this.cameras.main.fadeIn(500);
+      
       //you need a key to open the door, to the next level
       this.key = false;
 
@@ -143,7 +146,7 @@ export default class level2 extends Phaser.Scene {
         this.dr1.setTexture('dr1');
       }
 
-      //door texture == door closed, if player isn't touching the door
+      //player picks-up a key
       if(Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.key1.getBounds()) == true) { 
         this.key1.destroy();
         this.key = true;

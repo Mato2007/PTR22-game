@@ -15,6 +15,9 @@ export default class level1 extends Phaser.Scene {
   }
 
   create() {
+    //fade in
+    this.cameras.main.fadeIn(500);
+    
     //sprite(player)
     this.player = new Player(this, 0, 260).setOrigin(0,0);
 

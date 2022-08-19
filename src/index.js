@@ -4,6 +4,7 @@ import menu from './scenes/menu';
 import level1 from './scenes/lvl1';
 import level2 from './scenes/lvl2';
 import level3 from './scenes/lvl3';
+import end from './scenes/end';
 
 const config = {
   name: 'app',
@@ -15,7 +16,7 @@ const config = {
   
   width: 1024,
   height: 512,
-  scene: [Preloader, menu, level1, level2, level3],
+  scene: [Preloader, menu, level1, level2, level3, end],
   autoCenter: true,
 
   physics: {
